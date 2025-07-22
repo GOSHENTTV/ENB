@@ -55,6 +55,7 @@ float VigOffset < string UIName = "Lentille de pluie:: Vignette"; float UIStep =
 float llight < string UIName = "Lentille de pluie:: Éclairage"; > = { 4.0 };
 float lspec < string UIName = "Lentille de pluie:: Réfraction"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.0001; > = { 0.02 };
 bool rf < string UIName = "Lentille de pluie:: Forcer l'activation"; > = { false };
+
 float4 Test2 < string UIName = "Test2"; string UIWidget = "color"; int UIHidden = 1; > ;
 float4 Test3 < string UIName = "Test3"; string UIWidget = "color"; int UIHidden = 1; > ;
 
@@ -829,5 +830,34 @@ technique11 ModernBloom < string UIName = "Bloom moderne"; >
     {
         SetVertexShader(CompileShader(vs_5_0, VS_Quad()));
         SetPixelShader(CompileShader(ps_5_0, PS_ModernBloom()));
+    }
+}
+
+float4 PS_RDR2Clouds(VS_OUTPUT_POST IN) : SV_Target
+{
+    float4 color = TextureColor.Sample(Sampler1, IN.txcoord0.xy);
+
+    // Apply cloud density
+    color.a *= CloudDensity;
+
+    // Apply cloud noise
+    float2 noise_uv = IN.txcoord0.xy * ScreenSize.xy / 256.0;
+    float noise = tex2D(noisetex, noise_uv).r;
+    color.a *= 1.0 - (1.0 - noise) * CloudNoise;
+
+    // Apply wind speed
+    float2 wind_uv = IN.txcoord0.xy + float2(Timer.x * CloudWindSpeed, 0);
+    float4 wind_color = TextureColor.Sample(Sampler1, wind_uv);
+    color.rgb = lerp(color.rgb, wind_color.rgb, wind_color.a);
+
+    return color;
+}
+
+technique11 RDR2Clouds < string UIName = "Nuages RDR2"; >
+{
+    pass p0
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS_Quad()));
+        SetPixelShader(CompileShader(ps_5_0, PS_RDR2Clouds()));
     }
 }

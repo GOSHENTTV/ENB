@@ -75,6 +75,9 @@ float 	WeatherMultiN;
 float 	WeatherMultiD;
 float 	WeatherAddN;
 float 	WeatherAddD;
+float	CloudDensity;
+float	CloudNoise;
+float	CloudWindSpeed;
 /////////////////////////////////////////////////////////
 //              		VANILLA						   //
 /////////////////////////////////////////////////////////
