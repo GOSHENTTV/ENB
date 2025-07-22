@@ -1,56 +1,72 @@
 //AaronX 
 // SHADERS FROM RED DEAD 2 
 
-bool UsePaletteTexture < string UIName = "Use ENB Palette Texture"; > = { false };
-bool UseAtmos < string UIName = "Use Atmosphere (high altitude)"; > = { false };
+//GENERAL
+bool UsePaletteTexture < string UIName = "Utiliser la texture de la palette ENB"; > = { false };
+bool UseAtmos < string UIName = "Utiliser l'atmosphère (haute altitude)"; > = { false };
+
+//NIVEAUX
 int separator0 < string UIName = " "; int UIMin = 0; int UIMax = 0; > = { 0 };
-bool UseLevels < string UIName = "Use Levels"; > = { false };
-float3 iBlack < string UIName = "  Input Black Point"; string UIWidget = "color"; > = { 0.0314, 0.0353, 0.0392 };
-float3 iWhite < string UIName = "  Input White Point"; string UIWidget = "color"; > = { 0.9568, 0.9353, 0.9137 };
-float3 oBlack < string UIName = "  Output Black Point"; string UIWidget = "color"; > = { 0.0, 0.0, 0.0 };
-float3 oWhite < string UIName = "  Output White Point"; string UIWidget = "color"; > = { 1.0, 1.0, 1.0 };
+bool UseLevels < string UIName = "Utiliser les niveaux"; > = { false };
+float3 iBlack < string UIName = "  Point noir d'entrée"; string UIWidget = "color"; > = { 0.0314, 0.0353, 0.0392 };
+float3 iWhite < string UIName = "  Point blanc d'entrée"; string UIWidget = "color"; > = { 0.9568, 0.9353, 0.9137 };
+float3 oBlack < string UIName = "  Point noir de sortie"; string UIWidget = "color"; > = { 0.0, 0.0, 0.0 };
+float3 oWhite < string UIName = "  Point blanc de sortie"; string UIWidget = "color"; > = { 1.0, 1.0, 1.0 };
+
+//VIGNETTE
 int separator1 < string UIName = "  "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float postfx_vignette_intensity < string UIName = "RDR2::Vignette Intensity"; > = { 0.2996 };
-float3 postfx_vignette_tint < string UIName = "RDR2::Vignette Tint"; string UIWidget = "color"; > = { 1.0, 1.0, 1.0 };
-float postfx_vignette_axis_scale_x < string UIName = "RDR2::Vignette Axis Scale X"; > = { 1.0 };
-float postfx_vignette_axis_scale_y < string UIName = "RDR2::Vignette Axis Scale Y"; > = { 1.0 };
-float postfx_vignette_axis_tilt_x < string UIName = "RDR2::Vignette Axis Tilt X"; > = { 0.0 };
-float postfx_vignette_axis_tilt_y < string UIName = "RDR2::Vignette Axis Tilt Y"; > = { 0.0 };
-float postfx_vignette_inner_radius < string UIName = "RDR2::Vignette Inner Radius"; > = { 0.2 };
-float postfx_vignette_outer_radius < string UIName = "RDR2::Vignette Outer Radius"; > = { 2.0 };
+float postfx_vignette_intensity < string UIName = "RDR2::Intensité de la vignette"; > = { 0.2996 };
+float3 postfx_vignette_tint < string UIName = "RDR2::Teinte de la vignette"; string UIWidget = "color"; > = { 1.0, 1.0, 1.0 };
+float postfx_vignette_axis_scale_x < string UIName = "RDR2::Échelle de l'axe X de la vignette"; > = { 1.0 };
+float postfx_vignette_axis_scale_y < string UIName = "RDR2::Échelle de l'axe Y de la vignette"; > = { 1.0 };
+float postfx_vignette_axis_tilt_x < string UIName = "RDR2::Inclinaison de l'axe X de la vignette"; > = { 0.0 };
+float postfx_vignette_axis_tilt_y < string UIName = "RDR2::Inclinaison de l'axe Y de la vignette"; > = { 0.0 };
+float postfx_vignette_inner_radius < string UIName = "RDR2::Rayon intérieur de la vignette"; > = { 0.2 };
+float postfx_vignette_outer_radius < string UIName = "RDR2::Rayon extérieur de la vignette"; > = { 2.0 };
 int separator2 < string UIName = "   "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float vig_int_d < string UIName = "GammaVignette (day)"; float UIMin = 0.0; float UIMax = 1.0; > = { 0.0 };
-float vig_int_n < string UIName = "GammaVignette (night)"; float UIMin = 0.0; float UIMax = 1.0; > = { 0.0 };
+float vig_int_d < string UIName = "Vignette gamma (jour)"; float UIMin = 0.0; float UIMax = 1.0; > = { 0.0 };
+float vig_int_n < string UIName = "Vignette gamma (nuit)"; float UIMin = 0.0; float UIMax = 1.0; > = { 0.0 };
+
+//COULEUR
 int separator3 < string UIName = "    "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float3 Tint_d < string UIName = "Tint Color (day)"; string UIWidget = "color"; > = { 0.37, 0.39, 0.46 };
-float Tinti_d < string UIName = "Tint Intensity (day)"; float UIMin = 0.0; float UIMax = 1.0; > = { 0.0 };
+float3 Tint_d < string UIName = "Couleur de la teinte (jour)"; string UIWidget = "color"; > = { 0.37, 0.39, 0.46 };
+float Tinti_d < string UIName = "Intensité de la teinte (jour)"; float UIMin = 0.0; float UIMax = 1.0; > = { 0.0 };
 int separator4 < string UIName = "     "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float3 Tint_n < string UIName = "Tint Color (night)"; string UIWidget = "color"; > = { 0.37, 0.39, 0.46 };
-float Tinti_n < string UIName = "Tint Intensity (night)"; float UIMin = 0.0; float UIMax = 1.0; > = { 0.0 };
+float3 Tint_n < string UIName = "Couleur de la teinte (nuit)"; string UIWidget = "color"; > = { 0.37, 0.39, 0.46 };
+float Tinti_n < string UIName = "Intensité de la teinte (nuit)"; float UIMin = 0.0; float UIMax = 1.0; > = { 0.0 };
 int separator5 < string UIName = "      "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float3 cm_d < string UIName = "Color Mood (day)"; string UIWidget = "color"; > = { 0.705, 0.635, 0.55 };
-float cmi_d < string UIName = "Color Mood Intensity (day)"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.0 };
+float3 cm_d < string UIName = "Ambiance de couleur (jour)"; string UIWidget = "color"; > = { 0.705, 0.635, 0.55 };
+float cmi_d < string UIName = "Intensité de l'ambiance de couleur (jour)"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.0 };
 int separator6 < string UIName = "       "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float3 cm_n < string UIName = "Color Mood (night)"; string UIWidget = "color"; > = { 0.705, 0.635, 0.55 };
-float cmi_n < string UIName = "Color Mood Intensity (night)"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.0 };
+float3 cm_n < string UIName = "Ambiance de couleur (nuit)"; string UIWidget = "color"; > = { 0.705, 0.635, 0.55 };
+float cmi_n < string UIName = "Intensité de l'ambiance de couleur (nuit)"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.0 };
+
+//LUMINOSITE / CONTRASTE / SATURATION
 int separator7 < string UIName = "        "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float qBright_d < string UIName = "Bright (day)"; float UIMin = 0.01; float UIMax = 10.0; float UIStep = 0.001; > = { 1.0 };
-float qContrast_d < string UIName = "Contrast (day)"; float UIMin = -1.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.0 };
-float qGamma_d < string UIName = "Gamma (day)"; float UIMin = 0.01; float UIStep = 0.001; > = { 1.0 };
-float qSaturation_d < string UIName = "Saturation (day)"; float UIStep = 0.001; > = { 1.0 };
+float qBright_d < string UIName = "Luminosité (jour)"; float UIMin = 0.01; float UIMax = 10.0; float UIStep = 0.001; > = { 1.0 };
+float qContrast_d < string UIName = "Contraste (jour)"; float UIMin = -1.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.0 };
+float qGamma_d < string UIName = "Gamma (jour)"; float UIMin = 0.01; float UIStep = 0.001; > = { 1.0 };
+float qSaturation_d < string UIName = "Saturation (jour)"; float UIStep = 0.001; > = { 1.0 };
 int separator8 < string UIName = "         "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float qBright_n < string UIName = "Bright (night)"; float UIMin = 0.01; float UIMax = 10.0; float UIStep = 0.001; > = { 1.0 };
-float qContrast_n < string UIName = "Contrast (night)"; float UIMin = -1.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.0 };
-float qGamma_n < string UIName = "Gamma (night)"; float UIMin = 0.01; float UIStep = 0.001; > = { 1.0 };
-float qSaturation_n < string UIName = "Saturation (night)"; float UIStep = 0.001; > = { 1.0 };
+float qBright_n < string UIName = "Luminosité (nuit)"; float UIMin = 0.01; float UIMax = 10.0; float UIStep = 0.001; > = { 1.0 };
+float qContrast_n < string UIName = "Contraste (nuit)"; float UIMin = -1.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.0 };
+float qGamma_n < string UIName = "Gamma (nuit)"; float UIMin = 0.01; float UIStep = 0.001; > = { 1.0 };
+float qSaturation_n < string UIName = "Saturation (nuit)"; float UIStep = 0.001; > = { 1.0 };
+
+//DESATURATION
 int separator9 < string UIName = "          "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float desatR_d < string UIName = "Desaturate Red (day)"; float UIMin = 0.0; > = { 0.0 };
-float desatG_d < string UIName = "Desaturate Green (day)"; float UIMin = 0.0; > = { 0.0 };
-float desatB_d < string UIName = "Desaturate Blue (day)"; float UIMin = 0.0; > = { 0.0 };
+float desatR_d < string UIName = "Désaturer le rouge (jour)"; float UIMin = 0.0; > = { 0.0 };
+float desatG_d < string UIName = "Désaturer le vert (jour)"; float UIMin = 0.0; > = { 0.0 };
+float desatB_d < string UIName = "Désaturer le bleu (jour)"; float UIMin = 0.0; > = { 0.0 };
 int separator10 < string UIName = "           "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float desatR_n < string UIName = "Desaturate Red (night)"; float UIMin = 0.0; > = { 0.0 };
-float desatG_n < string UIName = "Desaturate Green (night)"; float UIMin = 0.0; > = { 0.0 };
-float desatB_n < string UIName = "Desaturate Blue (night)"; float UIMin = 0.0; > = { 0.0 };
+float desatR_n < string UIName = "Désaturer le rouge (nuit)"; float UIMin = 0.0; > = { 0.0 };
+float desatG_n < string UIName = "Désaturer le vert (nuit)"; float UIMin = 0.0; > = { 0.0 };
+float desatB_n < string UIName = "Désaturer le bleu (nuit)"; float UIMin = 0.0; > = { 0.0 };
+
+//ETALONNAGE DES COULEURS
+int separator11 < string UIName = "            "; int UIMin = 0; int UIMax = 0; > = { 0 };
+float3 colorGrading < string UIName = "Étalonnage des couleurs"; string UIWidget = "color"; > = { 1.0, 1.0, 1.0 };
+float colorGradingIntensity < string UIName = "Intensité de l'étalonnage des couleurs"; float UIMin = 0.0; float UIMax = 1.0; > = { 0.0 };
 float4 Test1 < string UIName = "Test1"; string UIWidget = "color"; int UIHidden = 1; > ;
 float4 Test2 < string UIName = "Test2"; string UIWidget = "color"; int UIHidden = 1; > ;
 
@@ -531,7 +547,7 @@ technique11 Draw < string UIName = "ENBSeries"; >
 		SetPixelShader(CompileShader(ps_5_0, PS_Draw()));
 	}
 }
-technique11 ORIGINALPOSTPROCESS < string UIName = "Vanilla"; >
+technique11 ORIGINALPOSTPROCESS < string UIName = "Vanille"; >
 {
 	pass p0
 	{

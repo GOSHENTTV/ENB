@@ -22,32 +22,39 @@ Texture2D ray < string ResourceName = "AaronX/lightning.png"; > ;
 Texture2D shape < string ResourceName = "AaronX/LensRain.png"; > ;
 
 static const float2 rcpFrame = float2(ScreenSize.y, ScreenSize.y * ScreenSize.z);
-float b < string UIName = "Bloom:: Intensity"; float UIMin = 0.0; float UIMax = 0.25; float UIStep = 0.0005; > = { 0.067 };
+//BLOOM
+float b < string UIName = "Bloom:: Intensité"; float UIMin = 0.0; float UIMax = 0.25; float UIStep = 0.0005; > = { 0.067 };
+
+//LENS FLARE
 int separator0 < string UIName = " "; int UIMin = 0; int UIMax = 0; > = { 0 };
 bool gp < string UIName = "GPLens"; > = { false };
-float gpi < string UIName = "GPLens:: Intensity"; float UIMin = 0.0; float UIMax = 0.1; float UIStep = 0.0001; > = { 0.0004 };
-float gpt < string UIName = "GPLens:: Threshold"; float UIMin = 0.0; float UIMax = 60.0; > = { 29.0 };
-float gpca < string UIName = "GPLens:: Chroma Distort"; float UIStep = 0.0001; > = { 0.01 };
-float gpfd < string UIName = "GPLens:: Flare Dispersal"; float UIMin = 0.0; float UIMax = 10.0; > = { 1.25 };
-float gphw < string UIName = "GPLens:: Halo Width"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.005; > = { 0.5 };
-float gpdesat < string UIName = "GPLens:: Desaturate"; > = { 1.0 };
-float3 gptint < string UIName = "GPLens:: Tint"; string UIWidget = "color"; > = { 1.0, 1.0, 1.0 };
+float gpi < string UIName = "GPLens:: Intensité"; float UIMin = 0.0; float UIMax = 0.1; float UIStep = 0.0001; > = { 0.0004 };
+float gpt < string UIName = "GPLens:: Seuil"; float UIMin = 0.0; float UIMax = 60.0; > = { 29.0 };
+float gpca < string UIName = "GPLens:: Distorsion chromatique"; float UIStep = 0.0001; > = { 0.01 };
+float gpfd < string UIName = "GPLens:: Dispersion de la lumière"; float UIMin = 0.0; float UIMax = 10.0; > = { 1.25 };
+float gphw < string UIName = "GPLens:: Largeur du halo"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.005; > = { 0.5 };
+float gpdesat < string UIName = "GPLens:: Désaturation"; > = { 1.0 };
+float3 gptint < string UIName = "GPLens:: Teinte"; string UIWidget = "color"; > = { 1.0, 1.0, 1.0 };
+
+//RAYON DE LUNE
 int separator1 < string UIName = "  "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float3 rcol < string UIName = "MoonRay:: Color"; string UIWidget = "color"; > = { 0.25, 0.31, 0.44 };
-float rin < string UIName = "MoonRay:: Intensity"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.0005; > = { 0.175 };
-float rwi < string UIName = "MoonRay:: Spread"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.0005; > = { 0.05 };
-float rde < string UIName = "MoonRay:: Decay"; float UIMin = 0.0; float UIMax = 100.0; float UIStep = 0.1; > = { 0.0 };
-float rca < string UIName = "MoonRay:: CA"; float UIMin = -10.0; float UIMax = 10.0; float UIStep = 0.05; > = { 1.5 };
-float rsc < string UIName = "MoonRay:: FrameScaling"; float UIMin = 0.05; float UIMax = 1.0; float UIStep = 0.0025; > = { 0.75 };
+float3 rcol < string UIName = "Rayon de lune:: Couleur"; string UIWidget = "color"; > = { 0.25, 0.31, 0.44 };
+float rin < string UIName = "Rayon de lune:: Intensité"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.0005; > = { 0.175 };
+float rwi < string UIName = "Rayon de lune:: Propagation"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.0005; > = { 0.05 };
+float rde < string UIName = "Rayon de lune:: Décroissance"; float UIMin = 0.0; float UIMax = 100.0; float UIStep = 0.1; > = { 0.0 };
+float rca < string UIName = "Rayon de lune:: AC"; float UIMin = -10.0; float UIMax = 10.0; float UIStep = 0.05; > = { 1.5 };
+float rsc < string UIName = "Rayon de lune:: Mise à l'échelle de l'image"; float UIMin = 0.05; float UIMax = 1.0; float UIStep = 0.0025; > = { 0.75 };
+
+//LENTILLE DE PLUIE
 int separator2 < string UIName = "   "; int UIMin = 0; int UIMax = 0; > = { 0 };
-float lintensity < string UIName = "RainLens:: Intensity"; float UIMin = 0.0; float UIMax = 10.0; > = { 1.0 };
-float lsize < string UIName = "RainLens:: Size"; float UIStep = 0.001; > = { 0.05 };
-float lspeed < string UIName = "RainLens:: Speed"; float UIMin = 0.001; float UIMax = 100.0; float UIStep = 0.1; > = { 21.0 };
-float grad < string UIName = "RainLens:: Gradient"; > = { 0.4 };
-float VigOffset < string UIName = "RainLens:: Vignette"; float UIStep = 0.001; > = { 0.225 };
-float llight < string UIName = "RainLens:: Lighting"; > = { 4.0 };
-float lspec < string UIName = "RainLens:: Refraction"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.0001; > = { 0.02 };
-bool rf < string UIName = "RainLens:: Force Enable"; > = { false };
+float lintensity < string UIName = "Lentille de pluie:: Intensité"; float UIMin = 0.0; float UIMax = 10.0; > = { 1.0 };
+float lsize < string UIName = "Lentille de pluie:: Taille"; float UIStep = 0.001; > = { 0.05 };
+float lspeed < string UIName = "Lentille de pluie:: Vitesse"; float UIMin = 0.001; float UIMax = 100.0; float UIStep = 0.1; > = { 21.0 };
+float grad < string UIName = "Lentille de pluie:: Dégradé"; > = { 0.4 };
+float VigOffset < string UIName = "Lentille de pluie:: Vignette"; float UIStep = 0.001; > = { 0.225 };
+float llight < string UIName = "Lentille de pluie:: Éclairage"; > = { 4.0 };
+float lspec < string UIName = "Lentille de pluie:: Réfraction"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.0001; > = { 0.02 };
+bool rf < string UIName = "Lentille de pluie:: Forcer l'activation"; > = { false };
 float4 Test2 < string UIName = "Test2"; string UIWidget = "color"; int UIHidden = 1; > ;
 float4 Test3 < string UIName = "Test3"; string UIWidget = "color"; int UIHidden = 1; > ;
 

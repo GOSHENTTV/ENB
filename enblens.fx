@@ -51,10 +51,11 @@ struct VS_OUTPUT_POSTQ8
 	float4 txcoord2	: TEXCOORD2;
 };
 
-float ii < string UIName = "LightStreak:: Intensity"; float UIMin = 10.0; float UIMax = 500.0; float UIStep = 0.5; > = { 161.0 };
-float th < string UIName = "LightStreak:: Threshold"; float UIMin = 50.0; float UIMax = 900.0; float UIStep = 0.5; > = { 379.0 };//279ReflectionFresnel
-float eld < string UIName = "LightStreak:: Emergency Lights Day"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.22 };
-float eln < string UIName = "LightStreak:: Emergency Lights Night"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.014 };
+//TRAINEE DE LUMIERE
+float ii < string UIName = "Traînée de lumière:: Intensité"; float UIMin = 10.0; float UIMax = 500.0; float UIStep = 0.5; > = { 161.0 };
+float th < string UIName = "Traînée de lumière:: Seuil"; float UIMin = 50.0; float UIMax = 900.0; float UIStep = 0.5; > = { 379.0 };//279ReflectionFresnel
+float eld < string UIName = "Traînée de lumière:: Lumières d'urgence de jour"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.22 };
+float eln < string UIName = "Traînée de lumière:: Lumières d'urgence de nuit"; float UIMin = 0.0; float UIMax = 1.0; float UIStep = 0.001; > = { 0.014 };
 VS_OUTPUT_POSTM VS_Threshold(VS_INPUT_POST IN)
 {
 	VS_OUTPUT_POSTM OUT;
