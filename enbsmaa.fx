@@ -328,4 +328,33 @@ float4 PS_SMAANeighborhoodBlending( VS_OUTPUT_SMAA i) : SV_Target {
     float4 offset[2] = {i.offset[0], i.offset[1]};
     return SMAANeighborhoodBlendingPS( i.texcoord, offset, TextureColor, SMAA_BLEND_TEX);
 }
+
+//NEW MODERN SMAA
+float4 PS_ModernSMAA(VS_OUTPUT_SMAA i) : SV_Target
+{
+    float4 color = TextureColor.Sample(LinearSampler, i.texcoord);
+    float4 edges = SMAA_EDGE_TEX.Sample(LinearSampler, i.texcoord);
+    float4 blend = SMAA_BLEND_TEX.Sample(LinearSampler, i.texcoord);
+
+    return SMAANeighborhoodBlendingPS( i.texcoord, i.offset, color, blend);
+}
+
+technique11 ModernSMAA < string UIName = "SMAA moderne"; >
+{
+    pass p0
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS_SMAAEdgeDetection));
+        SetPixelShader(CompileShader(ps_5_0, PS_SMAAEdgeDetection));
+    }
+    pass p1
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS_SMAABlendingWeightCalculation));
+        SetPixelShader(CompileShader(ps_5_0, PS_SMAABlendingWeightCalculation));
+    }
+    pass p2
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS_SMAANeighborhoodBlending));
+        SetPixelShader(CompileShader(ps_5_0, PS_ModernSMAA));
+    }
+}
 #endif  // end of header.

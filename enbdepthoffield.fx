@@ -552,7 +552,7 @@ technique11 Focus
     }
 }
 
-technique11 Dof <string UIName="Gameplay DOF Auto-focus"; string RenderTarget="RenderTargetR16F";>
+technique11 Dof <string UIName="DOF de jeu Auto-focus"; string RenderTarget="RenderTargetR16F";>
 {
     pass p0
     {
@@ -590,6 +590,43 @@ technique11 Dof3
     {
         SetVertexShader(CompileShader(vs_5_0, VS_Quad()));
         SetPixelShader(CompileShader(ps_5_0, PS_LensDistortion()));
+    }
+}
+
+//NEW MODERN DOF
+float4 PS_ModernDOF(VS_OUTPUT_POST IN) : SV_Target
+{
+    float  depth = TextureDepth.Sample(Sampler0, IN.txcoord0.xy).x;
+    float  focus = TextureFocus.Sample(Sampler0, IN.txcoord0.xy).x;
+    float3 color = TextureColor.Sample(Sampler1, IN.txcoord0.xy).xyz;
+    float  coc = ComputeCoC(depth, focus, ApertureSize, NearFieldPower);
+
+    float2 pixelres = 1.0f / ScreenSize.x * coc;
+    pixelres.y *= ScreenSize.z;
+
+    float3 blur = 0;
+    int count = 0;
+    for(int x = -4; x <= 4; x++)
+    {
+        for(int y = -4; y <= 4; y++)
+        {
+            float2 offset = float2(x, y) * pixelres;
+            blur += TextureColor.Sample(Sampler1, IN.txcoord0.xy + offset).xyz;
+            count++;
+        }
+    }
+
+    blur /= count;
+
+    return float4(lerp(color, blur, saturate(coc * 2.0)), 1.0);
+}
+
+technique11 ModernDOF < string UIName = "DOF moderne"; >
+{
+    pass p0
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS_Quad()));
+        SetPixelShader(CompileShader(ps_5_0, PS_ModernDOF()));
     }
 }
 

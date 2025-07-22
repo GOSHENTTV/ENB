@@ -804,3 +804,30 @@ technique11 lAaron24
 		SetPixelShader(CompileShader(ps_5_0, PS_RainLens1()));
 	}
 }
+
+//NEW MODERN BLOOM
+float4 PS_ModernBloom(VS_OUTPUT_POST IN) : SV_Target
+{
+    float3 res = 0;
+    float2 uv = IN.txcoord0.xy;
+    float2 texelSize = rcpFrame.xy;
+
+    for(int x = -4; x <= 4; x++)
+    {
+        for(int y = -4; y <= 4; y++)
+        {
+            res += TextureColor.SampleLevel(Sampler1, uv + float2(x, y) * texelSize, 0).xyz;
+        }
+    }
+
+    return float4(res / 81.0, 1.0);
+}
+
+technique11 ModernBloom < string UIName = "Bloom moderne"; >
+{
+    pass p0
+    {
+        SetVertexShader(CompileShader(vs_5_0, VS_Quad()));
+        SetPixelShader(CompileShader(ps_5_0, PS_ModernBloom()));
+    }
+}
